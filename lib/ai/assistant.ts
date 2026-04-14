@@ -57,7 +57,7 @@ export async function runScopedAssistant(userId: string, text: string, currency 
       en: [/biggest|largest/, /expense/],
       ro: [/cele mai/, /cheltuiel/],
     },
-  } as const;
+  };
 
   if (hasAll(input, intent.spendToday[language])) {
     const safe = await getDailySafeLimit(userId);
