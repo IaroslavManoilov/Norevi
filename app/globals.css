@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-950: #082b2f;
+  --brand-900: #0d3d43;
+  --brand-800: #11545b;
+  --brand-700: #176a71;
+  --brand-600: #1f8084;
+  --brand-500: #28989a;
+  --brand-400: #4fb0b0;
+  --brand-300: #7cc8c3;
+  --brand-200: #b9e1da;
+  --brand-100: #ddf1ec;
+  --brand-50: #f3faf8;
+
+  --mint-200: #cbe8df;
+  --mint-100: #ddf1ec;
+
+  --bg: #f5faf8;
+  --surface: #ffffff;
+  --surface-soft: #f4f8f7;
+  --text: #101818;
+  --text-soft: #5f706d;
+  --text-muted: #849592;
+  --border: #d4e2de;
+  --divider: #e2ece9;
+
+  --bg-dark: #10191b;
+  --surface-dark: #122024;
+  --surface-dark-soft: #18282c;
+  --text-dark: #e9f2ef;
+  --text-dark-soft: #a7b6b2;
+  --border-dark: #264045;
+  --divider-dark: #203338;
+
+  --success: #5e8a70;
+  --warning: #c9953e;
+  --danger: #d35f59;
+  --info: #2c8da0;
+
+  --shadow-soft: 0 8px 24px rgba(16, 24, 24, 0.06);
+  --shadow-card: 0 12px 36px rgba(16, 24, 24, 0.08);
+  --shadow-float: 0 20px 60px rgba(16, 24, 24, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --bg: var(--bg-dark);
+  --surface: var(--surface-dark);
+  --surface-soft: var(--surface-dark-soft);
+  --text: var(--text-dark);
+  --text-soft: var(--text-dark-soft);
+  --text-muted: #8fa39e;
+  --border: var(--border-dark);
+  --divider: var(--divider-dark);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-manrope), sans-serif;
 }

@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Norevi
 
-## Getting Started
+Norevi — PWA помощник для спокойного управления финансами, платежами, напоминаниями и ежедневным ритмом жизни.
 
-First, run the development server:
+## Стек
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS
+- UI-подход в стиле shadcn/ui (переиспользуемые UI-компоненты)
+- Supabase Auth + Postgres + RLS
+- React Hook Form + Zod
+- Recharts
+- OpenAI API (ассистент)
+- PWA через `next-pwa`
+
+## Структура проекта
+
+- `app/` — роуты, layouts, API handlers
+- `components/` — UI, layout, cards, forms, assistant, shared
+- `features/` — auth/onboarding feature-компоненты
+- `lib/` — auth/db/ai/utils/validation/formatters
+- `actions/` — server actions
+- `types/` — доменные типы
+- `supabase/migrations` — SQL миграции
+- `supabase/seed` — seed скрипты
+
+## Переменные окружения
+
+Скопируй `.env.example` в `.env.local` и заполни:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `OPENAI_API_KEY`
+
+## Где лежат бренд-ассеты
+
+Положи файлы в `public/brand`:
+
+- `logo-light.png`
+- `logo-dark.png`
+- `logo-mono.png`
+- `mark-light.png`
+- `mark-dark.png`
+- `favicon.png`
+- `icon-192.png`
+- `icon-512.png`
+- `apple-touch-icon.png`
+
+## Локальный запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открыть: `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Supabase setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Создай проект в Supabase.
+2. Пропиши env переменные.
+3. Выполни SQL из `supabase/migrations/20260408140000_init.sql` в SQL Editor.
+4. Выполни `supabase/seed/seed.sql` для существующих пользователей.
 
-## Learn More
+## Миграции и seed
 
-To learn more about Next.js, take a look at the following resources:
+- Основная миграция: `supabase/migrations/20260408140000_init.sql`
+- Seed: `supabase/seed/seed.sql`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Миграция создаёт:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- таблицы `profiles`, `categories`, `transactions`, `bills`, `reminders`, `ai_conversations`, `ai_messages`, `notifications`
+- индексы
+- триггеры `updated_at`
+- RLS и политики на все CRUD операции
+- автосоздание профиля и дефолтных категорий при регистрации
 
-## Deploy on Vercel
+## Как работает AI помощник
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Endpoint: `POST /api/assistant`
+- Сообщения/диалоги сохраняются в `ai_conversations` и `ai_messages`
+- Ассистент использует реальные данные из Supabase через tool-слой (`lib/ai/tools.ts`)
+- Поддерживает intents MVP:
+  - лимит на сегодня
+  - платежи недели
+  - траты на еду за месяц
+  - создание напоминания из текста
+  - подписки
+  - крупнейшие расходы месяца
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Нотификации и cron
+
+- Endpoint: `POST /api/notifications/process`
+- Готовит записи в `notifications` (queue-подход)
+- Можно запускать по cron (Vercel Cron) для дальнейшей доставки push/email
+
+## Deploy на Vercel
+
+1. Подключи репозиторий в Vercel.
+2. Добавь env переменные из `.env.local`.
+3. При деплое включится PWA-конфиг.
+4. Настрой cron на `/api/notifications/process` при необходимости.
+
+## Ключевые маршруты
+
+Public:
+
+- `/`
+- `/auth/sign-in`
+- `/auth/sign-up`
+
+Protected:
+
+- `/dashboard`
+- `/finance`
+- `/finance/new`
+- `/finance/[id]`
+- `/bills`
+- `/bills/new`
+- `/bills/[id]`
+- `/reminders`
+- `/reminders/new`
+- `/reminders/[id]`
+- `/assistant`
+- `/settings`
+- `/onboarding`
