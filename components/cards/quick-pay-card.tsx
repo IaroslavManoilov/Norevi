@@ -169,7 +169,7 @@ export function QuickPayCard({
     return tokens.slice(0, 2).join(" ") || base;
   };
 
-  const matchRule = (value: string) => {
+  const matchRule = (value: string): PaymentRule | null => {
     const normalized = normalizePattern(value);
     let best: PaymentRule | null = null;
     paymentRules.forEach((rule) => {
