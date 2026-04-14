@@ -17,7 +17,7 @@ const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPE
 
 type Language = "ru" | "en" | "ro";
 
-function hasAll(input: string, patterns: (string | RegExp)[]) {
+function hasAll(input: string, patterns: readonly (string | RegExp)[]) {
   return patterns.every((pattern) => (typeof pattern === "string" ? input.includes(pattern) : pattern.test(input)));
 }
 
