@@ -411,7 +411,11 @@ export default async function DashboardPage() {
             labels={{
               title: t.dashboard.upcomingBills,
               hint: t.dashboard.quickActionsHint,
-              empty: t.dashboard.upcomingBills,
+              empty: t.bills.emptyDescription,
+              statusUpcoming: t.bills.upcoming,
+              statusPaid: t.bills.paid,
+              statusOverdue: t.bills.overdue,
+              dueLabel: t.bills.dueLabel,
             }}
           />
         </MobileAccordion>
