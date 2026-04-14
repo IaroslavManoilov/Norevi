@@ -6,12 +6,12 @@ import type { Language } from "@/lib/i18n/translations";
 
 export function AppShell({
   children,
-  language,
-  currency,
+  language = "en",
+  currency = "MDL",
 }: {
   children: React.ReactNode;
-  language: Language;
-  currency: string;
+  language?: Language;
+  currency?: string;
 }) {
   return (
     <I18nProvider language={language}>
