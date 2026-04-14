@@ -428,7 +428,10 @@ export default async function DashboardPage() {
             labels={{
               title: t.dashboard.reminders,
               hint: t.dashboard.quickActionsHint,
-              empty: t.dashboard.reminders,
+              empty: t.reminders.emptyDescription,
+              priorityLow: t.reminders.priorityLow,
+              priorityMedium: t.reminders.priorityMedium,
+              priorityHigh: t.reminders.priorityHigh,
             }}
           />
         </MobileAccordion>
