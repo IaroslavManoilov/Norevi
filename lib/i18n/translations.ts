@@ -1682,6 +1682,11 @@ export const translations: Record<Language, Translations> = {
       rulesEmpty: "Nu exista sabloane.",
       ruleAddTitle: "Adauga sablon",
       ruleAddCta: "Adauga",
+      search: "Cauta plati",
+      filterAll: "Toate categoriile",
+      exportCsv: "Export CSV",
+      importCsv: "Import CSV",
+      importHint: "Incarca un CSV cu datele platilor",
     },
     finance: {
       title: "Finante",
