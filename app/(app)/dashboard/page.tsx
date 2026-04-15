@@ -170,7 +170,41 @@ export default async function DashboardPage() {
         signOutLabel={t.actions.signOut}
         language={language}
       />
-      <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
+      <div className="md:hidden">
+        <div className="-mx-3 flex snap-x snap-mandatory gap-3 overflow-x-auto px-3 pb-2">
+          <div className="min-w-[240px] snap-start">
+            <BalanceCard balance={balance} currency={profile?.currency ?? "MDL"} language={language} label={t.dashboard.balance} />
+          </div>
+          <div className="min-w-[220px] snap-start">
+            <SummaryMiniCard
+              title={t.dashboard.incomeMonth}
+              value={summary.income}
+              currency={profile?.currency ?? "MDL"}
+              language={language}
+            />
+          </div>
+          <div className="min-w-[220px] snap-start">
+            <SummaryMiniCard
+              title={t.dashboard.expenseMonth}
+              value={summary.expense}
+              currency={profile?.currency ?? "MDL"}
+              language={language}
+            />
+          </div>
+          <div className="min-w-[220px] snap-start">
+            <Card className="min-h-[148px]">
+              <p className="text-sm font-medium text-[var(--text-soft)]">{t.dashboard.billsWeek}</p>
+              <p className="mt-3 text-[clamp(1.65rem,2.1vw,2.3rem)] leading-[1.05] font-semibold tracking-tight [font-variant-numeric:tabular-nums]">
+                {billsThisWeek}
+              </p>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">
+                {t.dashboard.activeReminders}: {activeRemindersCount}
+              </p>
+            </Card>
+          </div>
+        </div>
+      </div>
+      <div className="hidden md:grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
         <BalanceCard balance={balance} currency={profile?.currency ?? "MDL"} language={language} label={t.dashboard.balance} />
         <SummaryMiniCard
           title={t.dashboard.incomeMonth}
@@ -195,60 +229,64 @@ export default async function DashboardPage() {
         </Card>
       </div>
       <div className="mt-4 grid gap-4 xl:grid-cols-2">
-        <QuickPayCard
-          bills={bills}
-          currency={profile?.currency ?? "MDL"}
-          language={language}
-          labels={{
-            title: t.dashboard.quickPayTitle,
-            hint: t.dashboard.quickPayHint,
-            salaryPlaceholder: t.dashboard.quickPaySalaryPlaceholder,
-            salaryCta: t.dashboard.quickPaySalaryCta,
-            salarySuccess: t.dashboard.quickPaySalarySuccess,
-            salaryError: t.dashboard.quickPaySalaryError,
-            billsTitle: t.dashboard.quickPayBillsTitle,
-            billsHint: t.dashboard.quickPayBillsHint,
-            billsEmpty: t.dashboard.quickPayBillsEmpty,
-            criticalLabel: t.dashboard.quickPayCriticalLabel,
-            overdueLabel: t.dashboard.quickPayOverdueLabel,
-            dueTodayLabel: t.dashboard.quickPayDueTodayLabel,
-            overdueOnlyLabel: t.dashboard.quickPayOverdueOnly,
-            billPay: t.dashboard.quickPayBillPay,
-            billPaying: t.dashboard.quickPayBillPaying,
-            billPaid: t.dashboard.quickPayBillPaid,
-            billPaidToday: t.dashboard.quickPayBillPaidToday,
-            billPaidLabel: t.dashboard.quickPayBillPaidLabel,
-            payAll: t.dashboard.quickPayPayAll,
-            payAllBusy: t.dashboard.quickPayPayAllBusy,
-            methodLabel: t.dashboard.quickPayMethodLabel,
-            methodApple: t.dashboard.quickPayMethodApple,
-            methodCard: t.dashboard.quickPayMethodCard,
-            paidVia: t.dashboard.quickPayPaidVia,
-            reminderTitle: t.dashboard.quickPayReminderTitle,
-            reminderBody: t.dashboard.quickPayReminderBody,
-            reminderToast: t.dashboard.quickPayReminderToast,
-            payInternet: t.dashboard.quickPayPayInternet,
-            payHousing: t.dashboard.quickPayPayHousing,
-            payCredit: t.dashboard.quickPayPayCredit,
-            payAllNoteTitle: t.dashboard.quickPayPayAllNoteTitle,
-            payAllNoteBody: t.dashboard.quickPayPayAllNoteBody,
-            payAllNoteSaved: t.dashboard.quickPayPayAllNoteSaved,
-            receiptTitle: t.dashboard.quickPayReceiptTitle,
-            receiptBody: t.dashboard.quickPayReceiptBody,
-            receiptSaved: t.dashboard.quickPayReceiptSaved,
-            billPaymentTitle: t.dashboard.quickPayBillPaymentTitle,
-            billPaymentNote: t.dashboard.quickPayBillPaymentNote,
-          }}
-        />
-        <DailyBudgetCard
-          mode="bills"
-          bills={bills}
-          currency={profile?.currency ?? "MDL"}
-          language={language}
-          monthlyIncome={summary.income}
-          monthlyExpense={summary.expense}
-          exchangeRates={(profile as { exchange_rates?: Record<string, number> })?.exchange_rates ?? undefined}
-        />
+        <MobileAccordion title={t.dashboard.quickPayTitle} subtitle={t.dashboard.quickPayHint} defaultOpen>
+          <QuickPayCard
+            bills={bills}
+            currency={profile?.currency ?? "MDL"}
+            language={language}
+            labels={{
+              title: t.dashboard.quickPayTitle,
+              hint: t.dashboard.quickPayHint,
+              salaryPlaceholder: t.dashboard.quickPaySalaryPlaceholder,
+              salaryCta: t.dashboard.quickPaySalaryCta,
+              salarySuccess: t.dashboard.quickPaySalarySuccess,
+              salaryError: t.dashboard.quickPaySalaryError,
+              billsTitle: t.dashboard.quickPayBillsTitle,
+              billsHint: t.dashboard.quickPayBillsHint,
+              billsEmpty: t.dashboard.quickPayBillsEmpty,
+              criticalLabel: t.dashboard.quickPayCriticalLabel,
+              overdueLabel: t.dashboard.quickPayOverdueLabel,
+              dueTodayLabel: t.dashboard.quickPayDueTodayLabel,
+              overdueOnlyLabel: t.dashboard.quickPayOverdueOnly,
+              billPay: t.dashboard.quickPayBillPay,
+              billPaying: t.dashboard.quickPayBillPaying,
+              billPaid: t.dashboard.quickPayBillPaid,
+              billPaidToday: t.dashboard.quickPayBillPaidToday,
+              billPaidLabel: t.dashboard.quickPayBillPaidLabel,
+              payAll: t.dashboard.quickPayPayAll,
+              payAllBusy: t.dashboard.quickPayPayAllBusy,
+              methodLabel: t.dashboard.quickPayMethodLabel,
+              methodApple: t.dashboard.quickPayMethodApple,
+              methodCard: t.dashboard.quickPayMethodCard,
+              paidVia: t.dashboard.quickPayPaidVia,
+              reminderTitle: t.dashboard.quickPayReminderTitle,
+              reminderBody: t.dashboard.quickPayReminderBody,
+              reminderToast: t.dashboard.quickPayReminderToast,
+              payInternet: t.dashboard.quickPayPayInternet,
+              payHousing: t.dashboard.quickPayPayHousing,
+              payCredit: t.dashboard.quickPayPayCredit,
+              payAllNoteTitle: t.dashboard.quickPayPayAllNoteTitle,
+              payAllNoteBody: t.dashboard.quickPayPayAllNoteBody,
+              payAllNoteSaved: t.dashboard.quickPayPayAllNoteSaved,
+              receiptTitle: t.dashboard.quickPayReceiptTitle,
+              receiptBody: t.dashboard.quickPayReceiptBody,
+              receiptSaved: t.dashboard.quickPayReceiptSaved,
+              billPaymentTitle: t.dashboard.quickPayBillPaymentTitle,
+              billPaymentNote: t.dashboard.quickPayBillPaymentNote,
+            }}
+          />
+        </MobileAccordion>
+        <MobileAccordion title={t.dashboard.dailyLimit} subtitle={t.dashboard.mustPayHint}>
+          <DailyBudgetCard
+            mode="bills"
+            bills={bills}
+            currency={profile?.currency ?? "MDL"}
+            language={language}
+            monthlyIncome={summary.income}
+            monthlyExpense={summary.expense}
+            exchangeRates={(profile as { exchange_rates?: Record<string, number> })?.exchange_rates ?? undefined}
+          />
+        </MobileAccordion>
       </div>
       <div className="mt-4 grid gap-4 xl:grid-cols-2">
         <QuickActionsCard
