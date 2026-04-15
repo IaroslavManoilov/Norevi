@@ -44,7 +44,7 @@ export function AuthLanguageSwitcher({ basePath, defaultLanguage, setup }: AuthL
   };
 
   return (
-    <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.06em] text-[var(--text-muted)]">
+    <div className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.08em] text-[var(--text-muted)]">
       {(["ru", "ro", "en"] as const).map((code) => (
         <button
           key={code}
@@ -54,8 +54,8 @@ export function AuthLanguageSwitcher({ basePath, defaultLanguage, setup }: AuthL
           title={t.languages[code]}
           className={
             code === current
-              ? "rounded-full bg-[var(--brand-700)] px-3 py-1 text-white"
-              : "rounded-full border border-[var(--border)] px-3 py-1 text-[var(--text-soft)] transition hover:border-[var(--brand-200)] hover:text-[var(--text)]"
+              ? "rounded-full bg-[var(--brand-700)] px-2.5 py-1 text-white shadow-[var(--shadow-soft)]"
+              : "rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text-soft)] transition hover:border-[var(--brand-200)] hover:text-[var(--text)]"
           }
         >
           {code}
