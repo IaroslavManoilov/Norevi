@@ -16,8 +16,8 @@ export default async function LandingPage({
   const t = getTranslations(language);
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-6 py-16">
-      <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-[var(--shadow-card)]">
-        <div className="mb-6 flex justify-end">
+      <div className="relative rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-[var(--shadow-card)]">
+        <div className="absolute bottom-6 right-6">
           <AuthLanguageSwitcher basePath="/" defaultLanguage={language} />
         </div>
         <BrandLockup titleClassName="text-[52px]" subtitleClassName="text-[9px]" tagline={t.tagline} />
