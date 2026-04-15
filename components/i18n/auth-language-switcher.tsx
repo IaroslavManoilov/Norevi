@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { getTranslations, type Language } from "@/lib/i18n/translations";
 
 type AuthLanguageSwitcherProps = {
-  basePath: "/auth/sign-in" | "/auth/sign-up";
+  basePath: "/auth/sign-in" | "/auth/sign-up" | "/";
   defaultLanguage: Language;
   setup?: string | null;
 };
