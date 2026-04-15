@@ -15,8 +15,8 @@ export default async function LandingPage({
     resolved?.lang === "en" || resolved?.lang === "ro" || resolved?.lang === "ru" ? resolved.lang : "en";
   const t = getTranslations(language);
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-16">
-      <div className="w-full max-w-4xl rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-[var(--shadow-card)]">
+    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-10">
+      <div className="w-full rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-10 shadow-[var(--shadow-card)]">
         <BrandLockup titleClassName="text-[52px]" subtitleClassName="text-[9px]" tagline={t.tagline} />
         <h1 className="mt-3 max-w-2xl text-4xl font-bold leading-tight text-[var(--text)]">
           {t.landing.title}
