@@ -17,7 +17,7 @@ export default async function LandingPage({
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-6 py-16">
       <div className="relative rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-[var(--shadow-card)]">
-        <div className="absolute bottom-6 right-6">
+        <div className="absolute bottom-6 left-8">
           <AuthLanguageSwitcher basePath="/" defaultLanguage={language} />
         </div>
         <BrandLockup titleClassName="text-[52px]" subtitleClassName="text-[9px]" tagline={t.tagline} />
