@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/db/supabase-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ export function SignInForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   return (
@@ -39,7 +41,24 @@ export function SignInForm() {
       }}
     >
       <Input type="email" placeholder={t.auth.email} value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <Input type="password" placeholder={t.auth.password} value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <div className="relative">
+        <Input
+          type={showPassword ? "text" : "password"}
+          placeholder={t.auth.password}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="pr-10"
+        />
+        <button
+          type="button"
+          aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-[var(--text-muted)] transition hover:text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-200)]"
+        >
+          {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+        </button>
+      </div>
       {error ? <p className="text-sm text-[var(--danger)]">{error}</p> : null}
       <Button type="submit" className="w-full">
         {t.auth.signInCta}
@@ -54,6 +73,7 @@ export function SignUpForm() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   return (
@@ -90,7 +110,24 @@ export function SignUpForm() {
     >
       <Input placeholder={t.auth.name} value={fullName} onChange={(e) => setFullName(e.target.value)} required />
       <Input type="email" placeholder={t.auth.email} value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <Input type="password" placeholder={t.auth.password} value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <div className="relative">
+        <Input
+          type={showPassword ? "text" : "password"}
+          placeholder={t.auth.password}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="pr-10"
+        />
+        <button
+          type="button"
+          aria-label={showPassword ? t.auth.hidePassword : t.auth.showPassword}
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-[var(--text-muted)] transition hover:text-[var(--text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-200)]"
+        >
+          {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+        </button>
+      </div>
       {error ? <p className="text-sm text-[var(--danger)]">{error}</p> : null}
       <Button type="submit" className="w-full">
         {t.auth.signUpCta}

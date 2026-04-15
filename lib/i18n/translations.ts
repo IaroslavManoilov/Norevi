@@ -77,6 +77,8 @@ export type Translations = {
     name: string;
     email: string;
     password: string;
+    showPassword: string;
+    hidePassword: string;
     envMissing: string;
     networkError: string;
   };
@@ -535,6 +537,8 @@ export const translations: Record<Language, Translations> = {
       name: "Имя",
       email: "Email",
       password: "Пароль",
+      showPassword: "Показать пароль",
+      hidePassword: "Скрыть пароль",
       envMissing: "Нужно заполнить NEXT_PUBLIC_SUPABASE_URL и NEXT_PUBLIC_SUPABASE_ANON_KEY в .env.local",
       networkError: "Ошибка сети к Supabase. Проверь NEXT_PUBLIC_SUPABASE_URL и интернет.",
     },
@@ -1000,6 +1004,8 @@ export const translations: Record<Language, Translations> = {
       name: "Name",
       email: "Email",
       password: "Password",
+      showPassword: "Show password",
+      hidePassword: "Hide password",
       envMissing: "Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Supabase network error. Check NEXT_PUBLIC_SUPABASE_URL and your connection.",
     },
@@ -1465,6 +1471,8 @@ export const translations: Record<Language, Translations> = {
       name: "Nume",
       email: "Email",
       password: "Parola",
+      showPassword: "Afiseaza parola",
+      hidePassword: "Ascunde parola",
       envMissing: "Seteaza NEXT_PUBLIC_SUPABASE_URL si NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Eroare de retea Supabase. Verifica NEXT_PUBLIC_SUPABASE_URL si conexiunea.",
     },
