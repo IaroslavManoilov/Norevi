@@ -28,7 +28,9 @@ export function AuthLanguageSwitcher({ basePath, defaultLanguage, setup }: AuthL
       }
       next.set("lang", stored);
       router.replace(`${basePath}?${next.toString()}`);
+      return;
     }
+    window.localStorage.setItem("norevi-language", defaultLanguage);
   }, [basePath, router, searchParams, setup]);
 
   const go = (code: Language) => {

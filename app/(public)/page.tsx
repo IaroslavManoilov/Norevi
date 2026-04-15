@@ -3,6 +3,7 @@ import { BrandLockup } from "@/components/brand/brand-lockup";
 import { Button } from "@/components/ui/button";
 import { getTranslations } from "@/lib/i18n/translations";
 import { AuthLanguageSwitcher } from "@/components/i18n/auth-language-switcher";
+import { LangLink } from "@/components/i18n/lang-link";
 
 export default async function LandingPage({
   searchParams,
@@ -13,8 +14,6 @@ export default async function LandingPage({
   const language =
     resolved?.lang === "en" || resolved?.lang === "ro" || resolved?.lang === "ru" ? resolved.lang : "en";
   const t = getTranslations(language);
-  const signInHref = `/auth/sign-in?lang=${language}`;
-  const signUpHref = `/auth/sign-up?lang=${language}`;
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center px-6 py-16">
       <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-8 shadow-[var(--shadow-card)]">
@@ -27,14 +26,14 @@ export default async function LandingPage({
         </h1>
         <p className="mt-3 max-w-xl text-[var(--text-soft)]">{t.landing.subtitle}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href={signUpHref}>
+          <LangLink href="/auth/sign-up" defaultLanguage={language}>
             <Button className="h-12 px-6">{t.landing.ctaPrimary}</Button>
-          </Link>
-          <Link href={signInHref}>
+          </LangLink>
+          <LangLink href="/auth/sign-in" defaultLanguage={language}>
             <Button variant="secondary" className="h-12 px-6">
               {t.landing.ctaSecondary}
             </Button>
-          </Link>
+          </LangLink>
         </div>
       </div>
     </main>
