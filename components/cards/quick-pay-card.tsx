@@ -418,15 +418,6 @@ export function QuickPayCard({
             <Button type="button" className="h-10 flex-1 px-3 text-xs sm:h-9 sm:flex-none" onClick={handleSalary} disabled={savingSalary}>
               {labels.salaryCta}
             </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              className="h-10 flex-1 px-3 text-xs sm:h-9 sm:flex-none"
-              onClick={handlePayAll}
-              disabled={payingAll || !payableBills.length}
-            >
-              {payingAll ? labels.payAllBusy : labels.payAll}
-            </Button>
           </div>
         </div>
       </div>
@@ -550,6 +541,17 @@ export function QuickPayCard({
         ) : (
           <p className="mt-3 text-sm text-[var(--text-muted)]">{labels.billsEmpty}</p>
         )}
+        <div className="mt-4 flex justify-end">
+          <Button
+            type="button"
+            variant="secondary"
+            className="h-10 px-4 text-xs"
+            onClick={handlePayAll}
+            disabled={payingAll || !payableBills.length}
+          >
+            {payingAll ? labels.payAllBusy : labels.payAll}
+          </Button>
+        </div>
       </div>
     </Card>
   );
