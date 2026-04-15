@@ -22,8 +22,11 @@ export function LanguageSwitcher({ language }: { language: "ru" | "en" | "ro" })
           type="button"
           variant={code === language ? "primary" : "secondary"}
           className="h-9 rounded-full px-3 text-xs font-semibold"
-          disabled={isPending || code === language}
+          disabled={isPending}
           onClick={() => {
+            if (code === language || isPending) {
+              return;
+            }
             const formData = new FormData();
             formData.set("language", code);
             startTransition(async () => {
