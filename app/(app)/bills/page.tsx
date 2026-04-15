@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { BillsList } from "@/components/shared/bills-list";
 import { Card } from "@/components/ui/card";
 import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
-import { CalendarDays, Plus } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getBills } from "@/lib/db/queries";
 import { formatMoney } from "@/lib/formatters";
@@ -113,8 +112,8 @@ export default async function BillsPage({
       <BillsList bills={filtered} currency={currency} language={language} />
       <MobileActionBar
         actions={[
-          { label: t.bills.addBill, href: "/bills/new", icon: Plus, tone: "primary" },
-          { label: t.bills.openCalendar, href: "/bills/calendar", icon: CalendarDays, tone: "secondary" },
+          { label: t.bills.addBill, href: "/bills/new", icon: "plus", tone: "primary" },
+          { label: t.bills.openCalendar, href: "/bills/calendar", icon: "calendar", tone: "secondary" },
         ]}
       />
     </div>

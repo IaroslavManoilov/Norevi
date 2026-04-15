@@ -1,8 +1,7 @@
 import { TopBar } from "@/components/layout/top-bar";
 import { AssistantChat } from "@/components/assistant/assistant-chat";
 import { Card } from "@/components/ui/card";
-import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
-import { MessageCircle } from "lucide-react";
+import { AssistantMobileAction } from "@/components/navigation/assistant-mobile-action";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getTranslations } from "@/lib/i18n/translations";
 
@@ -62,22 +61,7 @@ export default async function AssistantPage() {
       <div className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)]">
         <AssistantChat initialMessages={messages} conversationId={conversation?.id} />
       </div>
-      <MobileActionBar
-        actions={[
-          {
-            label: t.assistant.send,
-            icon: MessageCircle,
-            tone: "primary",
-            onClick: () => {
-              const input = document.getElementById("assistant-input") as HTMLInputElement | null;
-              if (input) {
-                input.focus();
-                input.scrollIntoView({ behavior: "smooth", block: "center" });
-              }
-            },
-          },
-        ]}
-      />
+      <AssistantMobileAction label={t.assistant.send} />
     </div>
   );
 }

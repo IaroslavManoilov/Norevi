@@ -47,10 +47,16 @@ export function TransactionForm({
     const method = id ? "PATCH" : "POST";
     const url = id ? `/api/finance/${id}` : "/api/finance";
 
+    const payload = {
+      ...values,
+      category_id: values.category_id ? values.category_id : null,
+      note: values.note?.trim() ? values.note : null,
+    };
+
     const res = await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
+      body: JSON.stringify(payload),
     });
 
     if (!res.ok) {
@@ -58,7 +64,7 @@ export function TransactionForm({
       if (data.error === "validation_error") {
         setServerError(t.errors.validation.generic);
       } else {
-        setServerError(t.errors.saveTransaction);
+        setServerError(data?.error ? `${t.errors.saveTransaction}: ${data.error}` : t.errors.saveTransaction);
       }
       return;
     }

@@ -5,7 +5,6 @@ import { TransactionsList } from "@/components/shared/transactions-list";
 import { Card } from "@/components/ui/card";
 import { SpendingChartCard } from "@/components/charts/spending-chart-card";
 import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
-import { ArrowDownLeft, ArrowUpRight, Calculator } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getTransactions, getCategories, getMonthlySummary, getExpenseAnalytics, NO_DATA_KEY, UNCATEGORIZED_KEY } from "@/lib/db/queries";
 import { formatDateRu, formatMoney } from "@/lib/formatters";
@@ -205,9 +204,9 @@ export default async function FinancePage({
       <TransactionsList transactions={filtered} currency={profile?.currency ?? "MDL"} />
       <MobileActionBar
         actions={[
-          { label: t.finance.addExpense, href: "/finance/new", icon: ArrowDownLeft, tone: "primary" },
-          { label: t.finance.addIncome, href: "/finance/new?type=income", icon: ArrowUpRight, tone: "secondary" },
-          { label: t.finance.openCalculator, href: "/finance/calculator", icon: Calculator, tone: "secondary" },
+          { label: t.finance.addExpense, href: "/finance/new", icon: "expense", tone: "primary" },
+          { label: t.finance.addIncome, href: "/finance/new?type=income", icon: "income", tone: "secondary" },
+          { label: t.finance.openCalculator, href: "/finance/calculator", icon: "calculator", tone: "secondary" },
         ]}
       />
     </div>

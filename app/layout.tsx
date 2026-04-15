@@ -15,12 +15,22 @@ export const metadata: Metadata = {
   },
   description: "Norevi — умный ритм жизни",
   applicationName: "Norevi",
+  appleWebApp: {
+    title: "Norevi",
+    capable: true,
+    statusBarStyle: "black-translucent",
+  },
   icons: {
     icon: "/brand/favicon.png",
     apple: "/brand/apple-touch-icon.png",
     shortcut: "/brand/favicon.png",
   },
   manifest: "/manifest.webmanifest",
+};
+
+export const viewport = {
+  themeColor: "#176A71",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

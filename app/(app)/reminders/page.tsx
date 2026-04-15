@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { RemindersList } from "@/components/shared/reminders-list";
 import { Card } from "@/components/ui/card";
 import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
-import { Plus } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getReminders } from "@/lib/db/queries";
 import { getTranslations } from "@/lib/i18n/translations";
@@ -161,7 +160,7 @@ export default async function RemindersPage({
       <RemindersList reminders={filtered} language={language} />
       <MobileActionBar
         actions={[
-          { label: t.reminders.addReminder, href: "/reminders/new", icon: Plus, tone: "primary" },
+          { label: t.reminders.addReminder, href: "/reminders/new", icon: "plus", tone: "primary" },
         ]}
       />
     </div>
