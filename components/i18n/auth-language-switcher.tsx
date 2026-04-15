@@ -58,7 +58,7 @@ export function AuthLanguageSwitcher({ basePath, defaultLanguage, setup }: AuthL
               : "rounded-full border border-[var(--border)] px-2.5 py-1 text-[var(--text-soft)] transition hover:border-[var(--brand-200)] hover:text-[var(--text)]"
           }
         >
-          {t.languages[code]}
+          {code}
         </button>
       ))}
     </div>

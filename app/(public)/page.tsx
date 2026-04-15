@@ -22,7 +22,7 @@ export default async function LandingPage({
           {t.landing.title}
         </h1>
         <p className="mt-3 text-[var(--text-soft)]">{t.landing.subtitle}</p>
-        <div className="mt-8 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
           <LangLink href="/auth/sign-up" defaultLanguage={language}>
             <Button className="h-12 px-6">{t.landing.ctaPrimary}</Button>
           </LangLink>
@@ -31,7 +31,7 @@ export default async function LandingPage({
               {t.landing.ctaSecondary}
             </Button>
           </LangLink>
-          <div className="ml-2">
+          <div className="ml-auto">
             <AuthLanguageSwitcher basePath="/" defaultLanguage={language} />
           </div>
         </div>
