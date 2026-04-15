@@ -19,7 +19,7 @@ export function BalanceCard({
   const t = getTranslations(language);
   const text = label ?? t.dashboard.balance;
   return (
-    <Card className={cn("min-h-[148px] bg-[var(--brand-700)] text-white", className)}>
+    <Card className={cn("min-h-[120px] bg-[var(--brand-700)] text-white sm:min-h-[148px]", className)}>
       <p className="text-sm font-medium text-white/80">{text}</p>
       <p className="mt-3 max-w-full text-[clamp(1.45rem,1.85vw,2rem)] leading-tight font-semibold tracking-tight [font-variant-numeric:tabular-nums] [word-break:keep-all]">
         {formatMoney(balance, currency, language)}

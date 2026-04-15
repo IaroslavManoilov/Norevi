@@ -25,16 +25,16 @@ export function MobileAccordion({
         )}
         open={defaultOpen}
       >
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-left [&::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3 py-2.5 text-left [&::-webkit-details-marker]:hidden">
           <div>
             <p className="text-sm font-semibold text-[var(--text)]">{title}</p>
             {subtitle ? <p className="text-xs text-[var(--text-muted)]">{subtitle}</p> : null}
           </div>
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--surface-soft)] text-[var(--text-muted)] transition group-open:rotate-180 dark:bg-[var(--surface-dark-soft)]">
+          <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--surface-soft)] text-[var(--text-muted)] transition group-open:rotate-180 dark:bg-[var(--surface-dark-soft)]">
             <ChevronDown size={16} />
           </span>
         </summary>
-        <div className="px-4 pb-4">{children}</div>
+        <div className="px-3 pb-3">{children}</div>
       </details>
     </>
   );

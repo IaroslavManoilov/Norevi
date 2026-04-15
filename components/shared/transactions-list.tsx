@@ -25,7 +25,7 @@ export function TransactionsList({
         {transactions.map((tx) => (
           <article
             key={tx.id}
-            className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-soft)]"
+            className="rounded-[16px] border border-[var(--border)] bg-[var(--surface)] p-3 shadow-[var(--shadow-soft)]"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
@@ -49,9 +49,9 @@ export function TransactionsList({
               <span>{formatDateRu(tx.transaction_date, language)}</span>
               {tx.note ? <span className="truncate max-w-[55%]">{tx.note}</span> : null}
             </div>
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+            <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
               <Link href={`/finance/${tx.id}`}>
-                <Button variant="secondary" className="h-9 px-3 text-xs">
+                <Button variant="secondary" className="h-8 px-3 text-xs">
                   {t.actions.open}
                 </Button>
               </Link>

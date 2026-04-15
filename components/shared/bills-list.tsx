@@ -27,7 +27,7 @@ export function BillsList({ bills, currency, language }: { bills: Bill[]; curren
         {bills.map((bill) => (
           <article
             key={bill.id}
-            className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] p-4 shadow-[var(--shadow-soft)]"
+            className="rounded-[16px] border border-[var(--border)] bg-[var(--surface)] p-3 shadow-[var(--shadow-soft)]"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
@@ -45,10 +45,10 @@ export function BillsList({ bills, currency, language }: { bills: Bill[]; curren
                 {formatMoney(Number(bill.amount), currency, language)}
               </p>
             </div>
-            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+            <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
               {bill.status !== "paid" ? <QuickMarkBillPaidButton billId={bill.id} /> : null}
               <Link href={`/bills/${bill.id}`}>
-                <Button variant="secondary" className="h-9 px-3 text-xs">
+                <Button variant="secondary" className="h-8 px-3 text-xs">
                   {t.actions.open}
                 </Button>
               </Link>

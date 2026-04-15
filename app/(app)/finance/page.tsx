@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { TransactionsList } from "@/components/shared/transactions-list";
 import { Card } from "@/components/ui/card";
 import { SpendingChartCard } from "@/components/charts/spending-chart-card";
+import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
+import { ArrowDownLeft, ArrowUpRight, Calculator } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getTransactions, getCategories, getMonthlySummary, getExpenseAnalytics, NO_DATA_KEY, UNCATEGORIZED_KEY } from "@/lib/db/queries";
 import { formatDateRu, formatMoney } from "@/lib/formatters";
@@ -73,26 +75,26 @@ export default async function FinancePage({
       </div>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Card className="min-h-[132px]">
+        <Card className="min-h-[108px] sm:min-h-[132px]">
           <p className="text-sm text-[var(--text-soft)]">{t.finance.monthBalance}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">
             {formatMoney(summary.balance, currency, language)}
           </p>
         </Card>
-        <Card className="min-h-[132px]">
+        <Card className="min-h-[108px] sm:min-h-[132px]">
           <p className="text-sm text-[var(--text-soft)]">{t.finance.avgPerDay}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">
             {formatMoney(analytics.avgPerDay, currency, language)}
           </p>
         </Card>
-        <Card className="min-h-[132px]">
+        <Card className="min-h-[108px] sm:min-h-[132px]">
           <p className="text-sm text-[var(--text-soft)]">{t.finance.filteredOps}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">{filtered.length}</p>
           <p className="mt-1 text-sm text-[var(--text-muted)]">
             {t.finance.incomeLabel}: {incomeCount} · {t.finance.expenseLabel}: {expenseCount}
           </p>
         </Card>
-        <Card className="min-h-[132px]">
+        <Card className="min-h-[108px] sm:min-h-[132px]">
           <p className="text-sm text-[var(--text-soft)]">{t.finance.topCategory}</p>
           <p className="mt-2 text-xl font-semibold tracking-tight">
             {topCategoryLabel} · {formatMoney(analytics.topCategory.amount, currency, language)}
@@ -201,6 +203,13 @@ export default async function FinancePage({
       </div>
 
       <TransactionsList transactions={filtered} currency={profile?.currency ?? "MDL"} />
+      <MobileActionBar
+        actions={[
+          { label: t.finance.addExpense, href: "/finance/new", icon: ArrowDownLeft, tone: "primary" },
+          { label: t.finance.addIncome, href: "/finance/new?type=income", icon: ArrowUpRight, tone: "secondary" },
+          { label: t.finance.openCalculator, href: "/finance/calculator", icon: Calculator, tone: "secondary" },
+        ]}
+      />
     </div>
   );
 }

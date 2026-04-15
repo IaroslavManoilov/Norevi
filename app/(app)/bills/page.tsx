@@ -3,6 +3,8 @@ import { TopBar } from "@/components/layout/top-bar";
 import { Button } from "@/components/ui/button";
 import { BillsList } from "@/components/shared/bills-list";
 import { Card } from "@/components/ui/card";
+import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
+import { CalendarDays, Plus } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getBills } from "@/lib/db/queries";
 import { formatMoney } from "@/lib/formatters";
@@ -54,18 +56,18 @@ export default async function BillsPage({
       </div>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.bills.totalBills}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">{bills.length}</p>
         </Card>
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.bills.needAttention}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">
             {upcomingCount + overdueCount}
           </p>
           <p className="mt-1 text-sm text-[var(--text-muted)]">{t.bills.overdueLabel}: {overdueCount}</p>
         </Card>
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.bills.sumByFilter}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">
             {formatMoney(monthTotal, currency, language)}
@@ -109,6 +111,12 @@ export default async function BillsPage({
       </div>
 
       <BillsList bills={filtered} currency={currency} language={language} />
+      <MobileActionBar
+        actions={[
+          { label: t.bills.addBill, href: "/bills/new", icon: Plus, tone: "primary" },
+          { label: t.bills.openCalendar, href: "/bills/calendar", icon: CalendarDays, tone: "secondary" },
+        ]}
+      />
     </div>
   );
 }

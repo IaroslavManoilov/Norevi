@@ -21,11 +21,12 @@ export function AssistantComposer({ onSend, loading }: { onSend: (text: string) 
       }}
     >
       <Input
+        id="assistant-input"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={t.assistant.placeholder}
       />
-      <Button type="submit" disabled={loading} className="sm:min-w-[140px]">
+      <Button type="submit" disabled={loading} className="h-10 sm:min-w-[140px]">
         {t.assistant.send}
       </Button>
     </form>

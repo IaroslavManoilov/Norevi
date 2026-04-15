@@ -60,8 +60,8 @@ export function AssistantChat({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-soft)] p-3 text-sm text-[var(--text-soft)] dark:border-[var(--border-dark)] dark:bg-[var(--surface-dark-soft)] dark:text-[var(--text-dark)]">
+    <div className="space-y-3">
+      <div className="rounded-[14px] border border-[var(--border)] bg-[var(--surface-soft)] p-2.5 text-sm text-[var(--text-soft)] dark:border-[var(--border-dark)] dark:bg-[var(--surface-dark-soft)] dark:text-[var(--text-dark)]">
         {t.assistant.helperHint}
       </div>
       <SuggestedPrompts onSelect={handleSend} />

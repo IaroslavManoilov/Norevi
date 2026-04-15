@@ -3,6 +3,8 @@ import { TopBar } from "@/components/layout/top-bar";
 import { Button } from "@/components/ui/button";
 import { RemindersList } from "@/components/shared/reminders-list";
 import { Card } from "@/components/ui/card";
+import { MobileActionBar } from "@/components/navigation/mobile-action-bar";
+import { Plus } from "lucide-react";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getReminders } from "@/lib/db/queries";
 import { getTranslations } from "@/lib/i18n/translations";
@@ -73,15 +75,15 @@ export default async function RemindersPage({
       </div>
 
       <div className="mb-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.reminders.totalReminders}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">{reminders.length}</p>
         </Card>
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.reminders.activeNow}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">{activeCount}</p>
         </Card>
-        <Card className="min-h-[128px]">
+        <Card className="min-h-[108px] sm:min-h-[128px]">
           <p className="text-sm text-[var(--text-soft)]">{t.reminders.highPriority}</p>
           <p className="mt-2 text-3xl font-semibold tracking-tight [font-variant-numeric:tabular-nums]">{highPriorityCount}</p>
         </Card>
@@ -157,6 +159,11 @@ export default async function RemindersPage({
       </div>
 
       <RemindersList reminders={filtered} language={language} />
+      <MobileActionBar
+        actions={[
+          { label: t.reminders.addReminder, href: "/reminders/new", icon: Plus, tone: "primary" },
+        ]}
+      />
     </div>
   );
 }
