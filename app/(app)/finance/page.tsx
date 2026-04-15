@@ -37,7 +37,7 @@ export default async function FinancePage({
   const expenseCount = filtered.filter((tx) => tx.type === "expense").length;
   const incomeCount = filtered.filter((tx) => tx.type === "income").length;
   const latestDate = transactions[0]?.transaction_date ?? null;
-  const latestDay = latestDate ? String(new Date(latestDate).getDate()).padStart(2, "0") : t.common.noData;
+  const latestDay = latestDate ? formatDateRu(latestDate, language) : t.common.noData;
   const topCategoryLabel =
     analytics.topCategory.name === NO_DATA_KEY
       ? latestDay
