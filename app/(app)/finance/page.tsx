@@ -5,8 +5,8 @@ import { TransactionsList } from "@/components/shared/transactions-list";
 import { Card } from "@/components/ui/card";
 import { SpendingChartCard } from "@/components/charts/spending-chart-card";
 import { requireOnboarded } from "@/lib/auth/guards";
-import { getTransactions, getCategories, getMonthlySummary, getExpenseAnalytics } from "@/lib/db/queries";
-import { formatMoney } from "@/lib/formatters";
+import { getTransactions, getCategories, getMonthlySummary, getExpenseAnalytics, NO_DATA_KEY, UNCATEGORIZED_KEY } from "@/lib/db/queries";
+import { formatDateRu, formatMoney } from "@/lib/formatters";
 import { getTranslations } from "@/lib/i18n/translations";
 
 export default async function FinancePage({
@@ -36,6 +36,14 @@ export default async function FinancePage({
   });
   const expenseCount = filtered.filter((tx) => tx.type === "expense").length;
   const incomeCount = filtered.filter((tx) => tx.type === "income").length;
+  const latestDate = transactions[0]?.transaction_date ?? null;
+  const latestDay = latestDate ? String(new Date(latestDate).getDate()).padStart(2, "0") : t.common.noData;
+  const topCategoryLabel =
+    analytics.topCategory.name === NO_DATA_KEY
+      ? latestDay
+      : analytics.topCategory.name === UNCATEGORIZED_KEY
+        ? t.forms.categoryNone
+        : analytics.topCategory.name;
 
   const typeChips = [
     { href: "/finance", label: t.finance.all, active: selectedType === "all" },
@@ -87,7 +95,7 @@ export default async function FinancePage({
         <Card className="min-h-[132px]">
           <p className="text-sm text-[var(--text-soft)]">{t.finance.topCategory}</p>
           <p className="mt-2 text-xl font-semibold tracking-tight">
-            {analytics.topCategory.name} · {formatMoney(analytics.topCategory.amount, currency, language)}
+            {topCategoryLabel} · {formatMoney(analytics.topCategory.amount, currency, language)}
           </p>
           <p className="mt-1 text-sm text-[var(--text-muted)]">
             {t.finance.changeLabel}: {analytics.changePercent.toFixed(1)}%
