@@ -6,13 +6,9 @@ export default function OfflinePage() {
         <p className="mt-3 text-sm text-[var(--text-soft)]">
           Похоже, сейчас нет интернета. Проверь подключение и попробуй снова.
         </p>
-        <button
-          type="button"
-          onClick={() => window.location.reload()}
-          className="mt-6 h-11 rounded-[16px] bg-[var(--brand-700)] px-5 text-sm font-semibold text-white transition hover:brightness-110"
-        >
-          Обновить
-        </button>
+        <p className="mt-6 inline-flex h-11 items-center justify-center rounded-[16px] bg-[var(--brand-700)] px-5 text-sm font-semibold text-white">
+          Обнови страницу вручную
+        </p>
       </div>
     </main>
   );
