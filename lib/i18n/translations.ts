@@ -74,6 +74,18 @@ export type Translations = {
     signUpTitle: string;
     signInCta: string;
     signUpCta: string;
+    methodPhone: string;
+    methodEmail: string;
+    phone: string;
+    otp: string;
+    sendCode: string;
+    verifyCode: string;
+    codeSent: string;
+    sendLink: string;
+    magicLinkSent: string;
+    or: string;
+    signInWithGoogle: string;
+    signInWithApple: string;
     name: string;
     email: string;
     password: string;
@@ -529,16 +541,28 @@ export const translations: Record<Language, Translations> = {
         generic: "Проверь поля формы",
       },
     },
-    auth: {
-      signInTitle: "Вход",
-      signUpTitle: "Регистрация",
-      signInCta: "Войти",
-      signUpCta: "Создать аккаунт",
-      name: "Имя",
-      email: "Email",
-      password: "Пароль",
-      showPassword: "Показать пароль",
-      hidePassword: "Скрыть пароль",
+  auth: {
+    signInTitle: "Вход",
+    signUpTitle: "Регистрация",
+    signInCta: "Войти",
+    signUpCta: "Создать аккаунт",
+    methodPhone: "Телефон",
+    methodEmail: "Email",
+    phone: "Номер телефона",
+    otp: "Код из SMS",
+    sendCode: "Отправить код",
+    verifyCode: "Подтвердить код",
+    codeSent: "Код отправлен по SMS.",
+    sendLink: "Отправить ссылку",
+    magicLinkSent: "Ссылка для входа отправлена на email.",
+    or: "или",
+    signInWithGoogle: "Войти через Google",
+    signInWithApple: "Войти через Apple",
+    name: "Имя",
+    email: "Email",
+    password: "Пароль",
+    showPassword: "Показать пароль",
+    hidePassword: "Скрыть пароль",
       envMissing: "Нужно заполнить NEXT_PUBLIC_SUPABASE_URL и NEXT_PUBLIC_SUPABASE_ANON_KEY в .env.local",
       networkError: "Ошибка сети к Supabase. Проверь NEXT_PUBLIC_SUPABASE_URL и интернет.",
     },
@@ -996,16 +1020,28 @@ export const translations: Record<Language, Translations> = {
         generic: "Please check the form fields",
       },
     },
-    auth: {
-      signInTitle: "Sign in",
-      signUpTitle: "Sign up",
-      signInCta: "Sign in",
-      signUpCta: "Create account",
-      name: "Name",
-      email: "Email",
-      password: "Password",
-      showPassword: "Show password",
-      hidePassword: "Hide password",
+  auth: {
+    signInTitle: "Sign in",
+    signUpTitle: "Sign up",
+    signInCta: "Sign in",
+    signUpCta: "Create account",
+    methodPhone: "Phone",
+    methodEmail: "Email",
+    phone: "Phone number",
+    otp: "SMS code",
+    sendCode: "Send code",
+    verifyCode: "Verify code",
+    codeSent: "SMS code sent.",
+    sendLink: "Send link",
+    magicLinkSent: "Magic link sent to email.",
+    or: "or",
+    signInWithGoogle: "Continue with Google",
+    signInWithApple: "Continue with Apple",
+    name: "Name",
+    email: "Email",
+    password: "Password",
+    showPassword: "Show password",
+    hidePassword: "Hide password",
       envMissing: "Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Supabase network error. Check NEXT_PUBLIC_SUPABASE_URL and your connection.",
     },
@@ -1463,16 +1499,28 @@ export const translations: Record<Language, Translations> = {
         generic: "Verifica campurile formularului",
       },
     },
-    auth: {
-      signInTitle: "Autentificare",
-      signUpTitle: "Inregistrare",
-      signInCta: "Autentificare",
-      signUpCta: "Creeaza cont",
-      name: "Nume",
-      email: "Email",
-      password: "Parola",
-      showPassword: "Afiseaza parola",
-      hidePassword: "Ascunde parola",
+  auth: {
+    signInTitle: "Autentificare",
+    signUpTitle: "Inregistrare",
+    signInCta: "Autentificare",
+    signUpCta: "Creeaza cont",
+    methodPhone: "Telefon",
+    methodEmail: "Email",
+    phone: "Numar de telefon",
+    otp: "Cod SMS",
+    sendCode: "Trimite cod",
+    verifyCode: "Confirma cod",
+    codeSent: "Codul a fost trimis prin SMS.",
+    sendLink: "Trimite link",
+    magicLinkSent: "Link de autentificare trimis pe email.",
+    or: "sau",
+    signInWithGoogle: "Continua cu Google",
+    signInWithApple: "Continua cu Apple",
+    name: "Nume",
+    email: "Email",
+    password: "Parola",
+    showPassword: "Afiseaza parola",
+    hidePassword: "Ascunde parola",
       envMissing: "Seteaza NEXT_PUBLIC_SUPABASE_URL si NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Eroare de retea Supabase. Verifica NEXT_PUBLIC_SUPABASE_URL si conexiunea.",
     },
