@@ -10,12 +10,13 @@ import { Sparkles, ShieldCheck } from "lucide-react";
 export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ setup?: string; lang?: string }>;
+  searchParams: Promise<{ setup?: string; lang?: string; oauth_error?: string }>;
 }) {
   const params = await searchParams;
   const language = params.lang === "en" || params.lang === "ro" || params.lang === "ru" ? params.lang : "en";
   const t = getTranslations(language);
   const setup = params.setup ?? null;
+  const oauthError = params.oauth_error ? decodeURIComponent(params.oauth_error) : null;
 
   return (
     <I18nProvider language={language}>
@@ -71,6 +72,11 @@ export default async function SignInPage({
             {params.setup === "supabase" ? (
               <p className="mb-4 rounded-[12px] border border-[var(--warning)]/30 bg-[var(--warning)]/10 p-3 text-sm text-[var(--text-soft)]">
                 {t.auth.envMissing}
+              </p>
+            ) : null}
+            {oauthError ? (
+              <p className="mb-4 rounded-[12px] border border-[var(--danger)]/30 bg-[var(--danger)]/10 p-3 text-sm text-[var(--danger)]">
+                {t.auth.oauthFailed}: {oauthError}
               </p>
             ) : null}
             <SignInForm />

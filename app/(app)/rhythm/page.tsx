@@ -6,6 +6,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { MobileAccordion } from "@/components/shared/mobile-accordion";
 import { QuickActionsCard } from "@/components/cards/quick-actions-card";
 import { RhythmCoachCard } from "@/components/cards/rhythm-coach-card";
+import { PushCenterCard } from "@/components/cards/push-center-card";
 import { FinanceCalculatorCard } from "@/components/cards/finance-calculator-card";
 import { FinancialCalendarCard } from "@/components/cards/financial-calendar-card";
 import { requireOnboarded } from "@/lib/auth/guards";
@@ -13,7 +14,6 @@ import { getTranslations } from "@/lib/i18n/translations";
 import { buildRhythmPlan } from "@/lib/utils/rhythm";
 import {
   getBalance,
-  getExpenseAnalytics,
   getMonthlySummary,
   getNotes,
   getReminders,
@@ -27,13 +27,12 @@ export default async function RhythmPage() {
   const t = getTranslations(language);
 
   await recalculateBillStatuses(supabase, user.id);
-  const [balance, summary, bills, reminders, notes, expenseAnalytics] = await Promise.all([
+  const [balance, summary, bills, reminders, notes] = await Promise.all([
     getBalance(supabase, user.id),
     getMonthlySummary(supabase, user.id),
     getUpcomingBillsWithinMonth(supabase, user.id),
     getReminders(supabase, user.id),
     getNotes(supabase, user.id),
-    getExpenseAnalytics(supabase, user.id),
   ]);
 
   const now = new Date();
@@ -193,6 +192,10 @@ export default async function RhythmPage() {
             calendar: t.nav.calendar,
           }}
         />
+      </div>
+
+      <div className="mt-4">
+        <PushCenterCard bills={bills} reminders={reminders} language={language} />
       </div>
 
       <div className="mt-4 grid gap-4 xl:grid-cols-2">

@@ -41,6 +41,15 @@ function resolveOAuthErrorMessage({
   return error?.message ?? fallback;
 }
 
+function resolveAuthRedirectUrl() {
+  const nextUrl = new URL(`${window.location.origin}/auth/callback`);
+  const currentLang = new URLSearchParams(window.location.search).get("lang");
+  if (currentLang === "ru" || currentLang === "en" || currentLang === "ro") {
+    nextUrl.searchParams.set("lang", currentLang);
+  }
+  return nextUrl.toString();
+}
+
 export function SignInForm() {
   const { t } = useI18n();
   const [email, setEmail] = useState("");
@@ -53,7 +62,7 @@ export function SignInForm() {
       const supabase = createClient();
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider,
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: resolveAuthRedirectUrl() },
       });
       if (oauthError) {
         setError(
@@ -94,7 +103,7 @@ export function SignInForm() {
             const { error: sendError } = await supabase.auth.signInWithOtp({
               email,
               options: {
-                emailRedirectTo: `${window.location.origin}/auth/callback`,
+                emailRedirectTo: resolveAuthRedirectUrl(),
               },
             });
             if (sendError) {
@@ -164,7 +173,7 @@ export function SignUpForm() {
       const supabase = createClient();
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider,
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo: resolveAuthRedirectUrl() },
       });
       if (oauthError) {
         setError(
@@ -206,7 +215,7 @@ export function SignUpForm() {
             const { error: sendError } = await supabase.auth.signInWithOtp({
               email,
               options: {
-                emailRedirectTo: `${window.location.origin}/auth/callback`,
+                emailRedirectTo: resolveAuthRedirectUrl(),
                 data: { full_name: fullName },
               },
             });

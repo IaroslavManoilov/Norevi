@@ -23,11 +23,41 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
+  const lang = searchParams.get("lang");
+  const safeLang = lang === "ru" || lang === "en" || lang === "ro" ? lang : null;
+  const authError = searchParams.get("error");
+  const authErrorDescription = searchParams.get("error_description");
 
-  if (code) {
-    await supabase.auth.exchangeCodeForSession(code);
+  const makeAuthErrorRedirect = (message: string) => {
+    const target = new URL("/auth/sign-in", request.url);
+    if (safeLang) {
+      target.searchParams.set("lang", safeLang);
+    }
+    target.searchParams.set("oauth_error", message);
+    return NextResponse.redirect(target);
+  };
+
+  if (authError || authErrorDescription) {
+    return makeAuthErrorRedirect(authErrorDescription ?? authError ?? "OAuth failed");
+  }
+
+  if (!code) {
+    return makeAuthErrorRedirect("Missing OAuth code");
+  }
+
+  try {
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error) {
+      return makeAuthErrorRedirect(error.message || "Unable to exchange external code");
+    }
+  } catch {
+    return makeAuthErrorRedirect("Unable to exchange external code");
   }
 
   const redirectTo = searchParams.get("redirectTo") ?? "/dashboard";
-  return NextResponse.redirect(new URL(redirectTo, request.url));
+  const successTarget = new URL(redirectTo, request.url);
+  if (safeLang && !successTarget.searchParams.get("lang")) {
+    successTarget.searchParams.set("lang", safeLang);
+  }
+  return NextResponse.redirect(successTarget);
 }

@@ -10,12 +10,13 @@ import { Sparkles, ShieldCheck } from "lucide-react";
 export default async function SignUpPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ lang?: string }>;
+  searchParams?: Promise<{ lang?: string; oauth_error?: string }>;
 }) {
   const resolved = searchParams ? await searchParams : undefined;
   const language =
     resolved?.lang === "en" || resolved?.lang === "ro" || resolved?.lang === "ru" ? resolved.lang : "en";
   const t = getTranslations(language);
+  const oauthError = resolved?.oauth_error ? decodeURIComponent(resolved.oauth_error) : null;
   return (
     <I18nProvider language={language}>
       <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_18%_12%,rgba(79,176,176,0.2),transparent_34%),radial-gradient(circle_at_80%_18%,rgba(23,106,113,0.28),transparent_38%),linear-gradient(160deg,#06191d,#0a2b31_58%,#0e3840)] px-4 py-8 text-[#e6f5f2] sm:px-6 sm:py-10">
@@ -66,6 +67,11 @@ export default async function SignUpPage({
             </div>
             <h2 className="mt-6 text-3xl font-bold text-[var(--text)]">{t.auth.signUpTitle}</h2>
             <p className="mb-5 mt-2 text-sm text-[var(--text-soft)]">{t.auth.signUpCta}</p>
+            {oauthError ? (
+              <p className="mb-4 rounded-[12px] border border-[var(--danger)]/30 bg-[var(--danger)]/10 p-3 text-sm text-[var(--danger)]">
+                {t.auth.oauthFailed}: {oauthError}
+              </p>
+            ) : null}
             <SignUpForm />
             <p className="mt-5 text-sm text-[var(--text-soft)]">
               {t.auth.signInTitle}?{" "}
