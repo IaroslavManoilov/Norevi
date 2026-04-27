@@ -43,7 +43,7 @@ export default async function SignInPage({
                 tagline={t.tagline}
               />
             </div>
-            <h1 className="mt-7 text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.03] font-bold text-[#eef9f6]">
+            <h1 className="mt-7 hidden text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.03] font-bold text-[#eef9f6] lg:block">
               {t.auth.signInTitle}
             </h1>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#bcd8d2]">
