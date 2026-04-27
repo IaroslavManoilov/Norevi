@@ -5,18 +5,12 @@ import { Button } from "@/components/ui/button";
 import { TopBar } from "@/components/layout/top-bar";
 import { MobileAccordion } from "@/components/shared/mobile-accordion";
 import { QuickActionsCard } from "@/components/cards/quick-actions-card";
-import { SmartActionsCard } from "@/components/cards/smart-actions-card";
 import { RhythmCoachCard } from "@/components/cards/rhythm-coach-card";
 import { FinanceCalculatorCard } from "@/components/cards/finance-calculator-card";
 import { FinancialCalendarCard } from "@/components/cards/financial-calendar-card";
 import { requireOnboarded } from "@/lib/auth/guards";
 import { getTranslations } from "@/lib/i18n/translations";
 import { buildRhythmPlan } from "@/lib/utils/rhythm";
-import { getSmartActions, resolveSmartActionsVariant } from "@/lib/utils/smart-actions";
-import {
-  getSmartActionPreferenceScores,
-  getSmartActionVariantPerformance,
-} from "@/features/smart-actions/server/smart-actions-events-service";
 import {
   getBalance,
   getExpenseAnalytics,
@@ -33,15 +27,13 @@ export default async function RhythmPage() {
   const t = getTranslations(language);
 
   await recalculateBillStatuses(supabase, user.id);
-  const [balance, summary, bills, reminders, notes, expenseAnalytics, smartPref, smartVariantPerf] = await Promise.all([
+  const [balance, summary, bills, reminders, notes, expenseAnalytics] = await Promise.all([
     getBalance(supabase, user.id),
     getMonthlySummary(supabase, user.id),
     getUpcomingBillsWithinMonth(supabase, user.id),
     getReminders(supabase, user.id),
     getNotes(supabase, user.id),
     getExpenseAnalytics(supabase, user.id),
-    getSmartActionPreferenceScores(supabase, user.id),
-    getSmartActionVariantPerformance(supabase, user.id),
   ]);
 
   const now = new Date();
@@ -59,22 +51,6 @@ export default async function RhythmPage() {
     return item.status !== "paid" && due >= nowTs && due <= nowTs + 3 * 24 * 60 * 60 * 1000;
   }).length;
   const monthlyDelta = summary.income - summary.expense;
-
-  const smartVariant = resolveSmartActionsVariant(user.id, smartVariantPerf);
-  const smartActions = getSmartActions({
-    language,
-    variant: smartVariant,
-    preferenceScores: smartPref,
-    balance,
-    monthlyIncome: summary.income,
-    monthlyExpense: summary.expense,
-    requiredBills,
-    billsThisWeek,
-    activeReminders,
-    changePercent: expenseAnalytics.changePercent,
-    foodSpentMonth: 0,
-    foodBudgetMonth: 1,
-  });
 
   const rhythmPlan = buildRhythmPlan({
     language,
@@ -243,19 +219,6 @@ export default async function RhythmPage() {
         </MobileAccordion>
       </div>
 
-      <div className="mt-4">
-        <SmartActionsCard
-          section={smartActions.section}
-          title={smartActions.title}
-          subtitle={smartActions.subtitle}
-          actions={smartActions.actions}
-          openLabel={smartActions.openLabel}
-          doneLabel={smartActions.doneLabel}
-          dismissLabel={smartActions.dismissLabel}
-          whyLabel={smartActions.whyLabel}
-          variant={smartVariant}
-        />
-      </div>
     </div>
   );
 }

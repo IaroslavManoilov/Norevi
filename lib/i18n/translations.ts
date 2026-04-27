@@ -94,6 +94,7 @@ export type Translations = {
     hidePassword: string;
     envMissing: string;
     networkError: string;
+    providerNotEnabled: string;
   };
   landing: {
     title: string;
@@ -567,6 +568,7 @@ export const translations: Record<Language, Translations> = {
     hidePassword: "Скрыть пароль",
       envMissing: "Нужно заполнить NEXT_PUBLIC_SUPABASE_URL и NEXT_PUBLIC_SUPABASE_ANON_KEY в .env.local",
       networkError: "Ошибка сети к Supabase. Проверь NEXT_PUBLIC_SUPABASE_URL и интернет.",
+      providerNotEnabled: "OAuth-провайдер не включен в Supabase",
     },
     landing: {
       title: "Спокойный контроль финансов, платежей и важных дел в одном месте.",
@@ -1047,6 +1049,7 @@ export const translations: Record<Language, Translations> = {
     hidePassword: "Hide password",
       envMissing: "Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Supabase network error. Check NEXT_PUBLIC_SUPABASE_URL and your connection.",
+      providerNotEnabled: "OAuth provider is not enabled in Supabase",
     },
     landing: {
       title: "Calm control of finances, bills, and important tasks in one place.",
@@ -1527,6 +1530,7 @@ export const translations: Record<Language, Translations> = {
     hidePassword: "Ascunde parola",
       envMissing: "Seteaza NEXT_PUBLIC_SUPABASE_URL si NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local",
       networkError: "Eroare de retea Supabase. Verifica NEXT_PUBLIC_SUPABASE_URL si conexiunea.",
+      providerNotEnabled: "Providerul OAuth nu este activat in Supabase",
     },
     landing: {
       title: "Control calm al finantelor, platilor si lucrurilor importante intr-un singur loc.",
