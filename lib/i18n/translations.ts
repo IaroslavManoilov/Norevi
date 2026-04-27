@@ -5,6 +5,7 @@ export type Translations = {
   tagline: string;
   nav: {
     overview: string;
+    rhythm: string;
     finance: string;
     bills: string;
     reminders: string;
@@ -477,6 +478,7 @@ export const translations: Record<Language, Translations> = {
     tagline: "умный ритм жизни",
     nav: {
       overview: "Обзор",
+      rhythm: "Ритм",
       finance: "Финансы",
       bills: "Платежи",
       reminders: "Напоминания",
@@ -956,6 +958,7 @@ export const translations: Record<Language, Translations> = {
     tagline: "smart life rhythm",
     nav: {
       overview: "Overview",
+      rhythm: "Rhythm",
       finance: "Finance",
       bills: "Bills",
       reminders: "Reminders",
@@ -1435,6 +1438,7 @@ export const translations: Record<Language, Translations> = {
     tagline: "ritm inteligent al vietii",
     nav: {
       overview: "Prezentare",
+      rhythm: "Ritm",
       finance: "Finante",
       bills: "Plati",
       reminders: "Memento",

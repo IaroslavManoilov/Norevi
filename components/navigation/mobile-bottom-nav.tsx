@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Wallet, CalendarClock, Bell, MessageSquare, ReceiptText } from "lucide-react";
+import { Home, Wallet, CalendarClock, Bell, MessageSquare, Brain } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useI18n } from "@/components/i18n/i18n-provider";
 
@@ -11,11 +11,11 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   const items = [
     { href: "/dashboard", label: t.nav.overview, icon: Home },
+    { href: "/rhythm", label: t.nav.rhythm, icon: Brain },
     { href: "/finance", label: t.nav.finance, icon: Wallet },
     { href: "/bills", label: t.nav.bills, icon: CalendarClock },
     { href: "/reminders", label: t.nav.reminders, icon: Bell },
     { href: "/assistant", label: t.nav.assistant, icon: MessageSquare },
-    { href: "/payments", label: t.nav.paymentsHistory, icon: ReceiptText },
   ];
 
   return (
