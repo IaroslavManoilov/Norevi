@@ -26,7 +26,7 @@ export function DesktopSidebar() {
   ];
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-[264px] shrink-0 border-r border-[var(--divider)] bg-[var(--surface)] px-4 py-6 md:flex md:flex-col">
+    <aside className="sticky top-0 hidden h-screen w-[264px] shrink-0 border-r border-[var(--divider)] bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] px-4 py-6 backdrop-blur md:flex md:flex-col">
       <Link href="/dashboard" className="mb-7 inline-flex max-w-full">
         <BrandLockup
           compact
@@ -47,7 +47,7 @@ export function DesktopSidebar() {
                   className={cn(
                     "flex h-11 items-center gap-3 rounded-[14px] px-3 text-sm font-medium",
                     active
-                      ? "bg-[var(--brand-50)] text-[var(--brand-800)]"
+                      ? "bg-[var(--brand-50)] text-[var(--brand-800)] shadow-[inset_0_0_0_1px_var(--brand-200)]"
                       : "text-[var(--text-soft)] hover:bg-[var(--surface-soft)] hover:text-[var(--text)]"
                   )}
                 >
@@ -72,7 +72,7 @@ export function DesktopSidebar() {
                   className={cn(
                     "flex h-10 items-center gap-3 rounded-[12px] px-3 text-sm font-medium",
                     active
-                      ? "bg-[var(--brand-50)] text-[var(--brand-800)]"
+                      ? "bg-[var(--brand-50)] text-[var(--brand-800)] shadow-[inset_0_0_0_1px_var(--brand-200)]"
                       : "text-[var(--text-soft)] hover:bg-[var(--surface-soft)] hover:text-[var(--text)]"
                   )}
                 >

@@ -184,12 +184,13 @@ export function RhythmCoachCard({
           : labels.enablePush;
 
   return (
-    <Card className="border-[var(--brand-200)] bg-[linear-gradient(135deg,var(--brand-50),var(--surface))]">
+    <Card className="relative overflow-hidden border-[var(--brand-200)] bg-[linear-gradient(135deg,var(--brand-50),var(--surface))]">
+      <div className="pointer-events-none absolute -top-10 -right-8 h-40 w-40 rounded-full bg-[var(--brand-300)]/22 blur-2xl" />
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm font-semibold text-[var(--brand-700)]">{labels.title}</p>
-            <h2 className="mt-1 text-xl font-bold text-[var(--text)]">{labels.subtitle}</h2>
+            <h2 className="mt-1 text-[clamp(1.1rem,2vw,1.5rem)] font-bold text-[var(--text)]">{labels.subtitle}</h2>
           </div>
           <div className="rounded-[14px] border border-[var(--brand-200)] bg-[var(--surface)] px-3 py-2 text-right">
             <p className="text-xs text-[var(--text-muted)]">{labels.rhythmScore}</p>

@@ -78,3 +78,47 @@ h3,
 h4 {
   font-family: var(--font-manrope), sans-serif;
 }
+
+.app-backdrop {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.app-backdrop::before,
+.app-backdrop::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(80px);
+}
+
+.app-backdrop::before {
+  top: -110px;
+  left: -120px;
+  width: 360px;
+  height: 360px;
+  background: color-mix(in srgb, var(--brand-300) 35%, transparent);
+}
+
+.app-backdrop::after {
+  right: -140px;
+  bottom: -120px;
+  width: 420px;
+  height: 420px;
+  background: color-mix(in srgb, var(--brand-500) 26%, transparent);
+}
+
+.glass-panel {
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.focus-ring-soft {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brand-200) 70%, transparent),
+    0 12px 28px rgba(9, 26, 27, 0.1);
+}

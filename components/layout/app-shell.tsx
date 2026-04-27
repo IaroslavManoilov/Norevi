@@ -16,9 +16,9 @@ export function AppShell({
   return (
     <I18nProvider language={language}>
       <RatesAutoSync baseCurrency={currency} />
-      <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] md:grid md:grid-cols-[264px_minmax(0,1fr)]">
+      <div className="app-backdrop min-h-screen bg-[var(--bg)] text-[var(--text)] md:grid md:grid-cols-[264px_minmax(0,1fr)]">
         <DesktopSidebar />
-        <main className="min-w-0 px-3 pb-28 pt-3 sm:px-6 sm:pb-24 md:px-8 md:pb-8 md:pt-7 lg:px-10">
+        <main className="min-w-0 px-3 pb-28 pt-3 sm:px-6 sm:pb-24 md:px-8 md:pb-8 md:pt-6 lg:px-10">
           <div className="mx-auto w-full max-w-[1120px]">{children}</div>
         </main>
         <MobileBottomNav />

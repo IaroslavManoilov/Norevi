@@ -23,13 +23,13 @@ export function TopBar({
   const quickLabel = quickActionLabel ?? t.actions.quickAction;
   const signOutText = signOutLabel ?? t.actions.signOut;
   return (
-    <header className="sticky top-0 z-20 -mx-3 mb-5 flex flex-col gap-3 border-b border-[var(--divider)] bg-[var(--bg)]/95 px-3 pb-4 pt-3 backdrop-blur sm:static sm:z-auto sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:backdrop-blur-0 sm:flex-row sm:items-start sm:justify-between">
+    <header className="glass-panel sticky top-0 z-20 -mx-3 mb-5 flex flex-col gap-3 rounded-b-[20px] border-b border-[var(--divider)] px-3 pb-4 pt-3 sm:static sm:z-auto sm:mx-0 sm:rounded-[18px] sm:border sm:bg-transparent sm:px-4 sm:py-3 sm:backdrop-blur-0 sm:flex-row sm:items-start sm:justify-between">
       <div className="flex items-start justify-between gap-3">
         <div className="max-w-full">
-        <h1 className="text-2xl leading-tight font-bold tracking-tight text-[var(--text)] sm:text-4xl md:text-[44px]">
-          {title}
-        </h1>
-        {subtitle ? <p className="mt-1 text-sm text-[var(--text-soft)] sm:text-lg">{subtitle}</p> : null}
+          <h1 className="text-2xl leading-tight font-bold tracking-tight text-[var(--text)] sm:text-4xl md:text-[42px]">
+            {title}
+          </h1>
+          {subtitle ? <p className="mt-1 text-sm text-[var(--text-soft)] sm:text-base">{subtitle}</p> : null}
         </div>
         <div className="sm:hidden">
           <MobileTopMenu language={language} quickActionLabel={quickLabel} signOutLabel={signOutText} />

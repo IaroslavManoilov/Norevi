@@ -19,8 +19,8 @@ export function MobileBottomNav() {
   ];
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--divider)] bg-[var(--surface)]/95 px-2 pb-[calc(env(safe-area-inset-bottom)+8px)] pt-2 backdrop-blur md:hidden">
-      <ul className="grid grid-cols-6 gap-1">
+    <nav className="fixed inset-x-0 bottom-0 z-40 px-2 pb-[calc(env(safe-area-inset-bottom)+10px)] pt-2 md:hidden">
+      <ul className="glass-panel focus-ring-soft mx-auto grid max-w-[720px] grid-cols-6 gap-1 rounded-[20px] px-1.5 py-1.5">
         {items.map((item) => {
           const active = pathname.startsWith(item.href);
           const Icon = item.icon;
@@ -31,7 +31,7 @@ export function MobileBottomNav() {
                 className={cn(
                   "flex flex-col items-center gap-1 rounded-[12px] px-2 py-2 text-[10px] transition",
                   active
-                    ? "bg-[var(--surface-soft)] text-[var(--brand-700)]"
+                    ? "bg-[var(--brand-50)] text-[var(--brand-700)]"
                     : "text-[var(--text-muted)] hover:bg-[var(--surface-soft)]"
                 )}
               >
