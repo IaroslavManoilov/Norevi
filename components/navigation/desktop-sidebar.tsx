@@ -26,11 +26,11 @@ export function DesktopSidebar() {
   ];
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-[264px] shrink-0 border-r border-[var(--divider)] bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] px-4 py-6 backdrop-blur md:flex md:flex-col">
+    <aside className="sticky top-0 hidden h-screen w-[236px] shrink-0 border-r border-[var(--divider)] bg-[color-mix(in_srgb,var(--surface)_86%,transparent)] px-3 py-5 backdrop-blur md:flex md:flex-col lg:w-[264px] lg:px-4 lg:py-6">
       <Link href="/dashboard" className="mb-7 inline-flex max-w-full">
         <BrandLockup
           compact
-          titleClassName="text-[44px] leading-none"
+          titleClassName="text-[40px] leading-none lg:text-[44px]"
           subtitleClassName="text-[9px] tracking-[0.24em]"
           tagline={t.tagline}
         />

@@ -203,7 +203,7 @@ export function RhythmCoachCard({
           <p className="mt-1 text-sm font-medium text-[var(--text)]">{focusText}</p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5">
           <Button type="button" variant={pushState === "enabled" ? "secondary" : "primary"} onClick={requestPushPermission}>
             {labels.enablePush}
           </Button>
@@ -222,7 +222,7 @@ export function RhythmCoachCard({
                 key={task.id}
                 className="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] px-3 py-3 dark:border-[var(--border-dark)] dark:bg-[var(--surface-dark)]"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col gap-2.5 min-[420px]:flex-row min-[420px]:items-start min-[420px]:justify-between">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--brand-100)] text-[var(--brand-800)]">
@@ -239,18 +239,20 @@ export function RhythmCoachCard({
                           : labels.priorityLow}
                     </p>
                   </div>
-                  <Link
-                    href={task.href}
-                    className="rounded-full border border-[var(--brand-300)] bg-[var(--surface)] px-2.5 py-1 text-xs font-semibold text-[var(--brand-800)]"
-                  >
-                    {labels.openTask}
-                  </Link>
+                  <div className="min-[420px]:pt-0.5">
+                    <Link
+                      href={task.href}
+                      className="inline-flex h-8 items-center justify-center rounded-full border border-[var(--brand-300)] bg-[var(--surface)] px-3 text-xs font-semibold text-[var(--brand-800)]"
+                    >
+                      {labels.openTask}
+                    </Link>
+                  </div>
                 </div>
                 <div className="mt-2">
                   <Button
                     type="button"
                     variant="secondary"
-                    className="h-9 text-xs"
+                    className="h-9 w-full text-xs min-[420px]:w-auto"
                     disabled={pendingTaskId === task.id}
                     onClick={() => createReminderFromTask(task)}
                   >

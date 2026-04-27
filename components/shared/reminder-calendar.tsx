@@ -253,14 +253,14 @@ export function ReminderCalendar({
         </div>
       )}
 
-      <div className="grid grid-cols-7 gap-2 text-xs text-[var(--text-muted)]">
+      <div className="grid grid-cols-7 gap-1.5 text-[11px] text-[var(--text-muted)] sm:gap-2 sm:text-xs">
         {weekDays.map((day) => (
           <div key={day} className="text-center">
             {day}
           </div>
         ))}
       </div>
-      <div className="mt-2 grid grid-cols-7 gap-2">
+      <div className="mt-2 grid grid-cols-7 gap-1.5 sm:gap-2">
         {cells.map((date) => {
           const key = toDateKey(date);
           const inMonth = date.getMonth() === month.getMonth();
@@ -280,7 +280,7 @@ export function ReminderCalendar({
               type="button"
               onClick={() => setSelected(date)}
               className={[
-                "relative flex h-10 items-center justify-center rounded-[12px] border text-sm transition",
+                "relative flex h-9 items-center justify-center rounded-[11px] border text-xs transition sm:h-10 sm:rounded-[12px] sm:text-sm",
                 inMonth ? "border-[var(--border)] text-[var(--text)]" : "border-transparent text-[var(--text-muted)]",
                 isSelected
                   ? "border-[var(--brand-700)] bg-[var(--brand-700)] text-white"

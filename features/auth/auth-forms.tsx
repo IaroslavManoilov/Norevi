@@ -51,13 +51,23 @@ function resolveAuthRedirectUrl() {
 }
 
 export function SignInForm() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const [email, setEmail] = useState("");
   const [info, setInfo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pendingProvider, setPendingProvider] = useState<OAuthProvider | null>(null);
+  const googleEnabled = process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED !== "false";
+  const appleEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
+  const oauthHint =
+    language === "ru"
+      ? "Если кнопка не работает, включите провайдера в Supabase: Authentication -> Sign In / Providers."
+      : language === "ro"
+        ? "Daca butonul nu functioneaza, activeaza providerul in Supabase: Authentication -> Sign In / Providers."
+        : "If a button fails, enable that provider in Supabase: Authentication -> Sign In / Providers.";
 
   const signInWithOAuth = async (provider: OAuthProvider, providerLabel: string) => {
     setError(null);
+    setPendingProvider(provider);
     try {
       const supabase = createClient();
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
@@ -83,6 +93,8 @@ export function SignInForm() {
           fallback: t.auth.networkError,
         })
       );
+    } finally {
+      setPendingProvider(null);
     }
   };
 
@@ -139,36 +151,53 @@ export function SignInForm() {
       </div>
 
       <div className="grid gap-2 sm:grid-cols-2">
-        <Button
-          variant="secondary"
-          className="h-11 w-full rounded-[12px]"
-          type="button"
-          onClick={() => signInWithOAuth("google", "Google")}
-        >
-          {t.auth.signInWithGoogle}
-        </Button>
-        <Button
-          variant="secondary"
-          className="h-11 w-full rounded-[12px]"
-          type="button"
-          onClick={() => signInWithOAuth("apple", "Apple")}
-        >
-          {t.auth.signInWithApple}
-        </Button>
+        {googleEnabled ? (
+          <Button
+            variant="secondary"
+            className="h-11 w-full rounded-[12px]"
+            type="button"
+            onClick={() => signInWithOAuth("google", "Google")}
+            disabled={pendingProvider !== null}
+          >
+            {pendingProvider === "google" ? "..." : t.auth.signInWithGoogle}
+          </Button>
+        ) : null}
+        {appleEnabled ? (
+          <Button
+            variant="secondary"
+            className="h-11 w-full rounded-[12px]"
+            type="button"
+            onClick={() => signInWithOAuth("apple", "Apple")}
+            disabled={pendingProvider !== null}
+          >
+            {pendingProvider === "apple" ? "..." : t.auth.signInWithApple}
+          </Button>
+        ) : null}
       </div>
+      <p className="text-xs leading-relaxed text-[var(--text-muted)]">{oauthHint}</p>
     </div>
   );
 }
 
 export function SignUpForm() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [info, setInfo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pendingProvider, setPendingProvider] = useState<OAuthProvider | null>(null);
+  const googleEnabled = process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED !== "false";
+  const appleEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
+  const oauthHint =
+    language === "ru"
+      ? "Если OAuth не запускается, проверьте provider и callback URL в Supabase."
+      : language === "ro"
+        ? "Daca OAuth nu porneste, verifica providerul si callback URL in Supabase."
+        : "If OAuth does not start, verify provider settings and callback URL in Supabase.";
 
   const signInWithOAuth = async (provider: OAuthProvider, providerLabel: string) => {
     setError(null);
+    setPendingProvider(provider);
     try {
       const supabase = createClient();
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
@@ -194,6 +223,8 @@ export function SignUpForm() {
           fallback: t.auth.networkError,
         })
       );
+    } finally {
+      setPendingProvider(null);
     }
   };
 
@@ -252,23 +283,30 @@ export function SignUpForm() {
       </div>
 
       <div className="grid gap-2 sm:grid-cols-2">
-        <Button
-          variant="secondary"
-          className="h-11 w-full rounded-[12px]"
-          type="button"
-          onClick={() => signInWithOAuth("google", "Google")}
-        >
-          {t.auth.signInWithGoogle}
-        </Button>
-        <Button
-          variant="secondary"
-          className="h-11 w-full rounded-[12px]"
-          type="button"
-          onClick={() => signInWithOAuth("apple", "Apple")}
-        >
-          {t.auth.signInWithApple}
-        </Button>
+        {googleEnabled ? (
+          <Button
+            variant="secondary"
+            className="h-11 w-full rounded-[12px]"
+            type="button"
+            onClick={() => signInWithOAuth("google", "Google")}
+            disabled={pendingProvider !== null}
+          >
+            {pendingProvider === "google" ? "..." : t.auth.signInWithGoogle}
+          </Button>
+        ) : null}
+        {appleEnabled ? (
+          <Button
+            variant="secondary"
+            className="h-11 w-full rounded-[12px]"
+            type="button"
+            onClick={() => signInWithOAuth("apple", "Apple")}
+            disabled={pendingProvider !== null}
+          >
+            {pendingProvider === "apple" ? "..." : t.auth.signInWithApple}
+          </Button>
+        ) : null}
       </div>
+      <p className="text-xs leading-relaxed text-[var(--text-muted)]">{oauthHint}</p>
     </div>
   );
 }

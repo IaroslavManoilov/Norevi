@@ -17,11 +17,18 @@ export default async function SignUpPage({
     resolved?.lang === "en" || resolved?.lang === "ro" || resolved?.lang === "ru" ? resolved.lang : "en";
   const t = getTranslations(language);
   const oauthError = resolved?.oauth_error ? decodeURIComponent(resolved.oauth_error) : null;
+  const oauthCallbackHint = oauthError?.toLowerCase().includes("unable to exchange external code")
+    ? language === "ru"
+      ? "Проверьте Google OAuth: callback URL из Supabase должен быть добавлен в Authorized redirect URIs в Google Cloud."
+      : language === "ro"
+        ? "Verifica Google OAuth: callback URL din Supabase trebuie adaugat in Authorized redirect URIs in Google Cloud."
+        : "Check Google OAuth: Supabase callback URL must be added to Authorized redirect URIs in Google Cloud."
+    : null;
   return (
     <I18nProvider language={language}>
       <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_18%_12%,rgba(79,176,176,0.2),transparent_34%),radial-gradient(circle_at_80%_18%,rgba(23,106,113,0.28),transparent_38%),linear-gradient(160deg,#06191d,#0a2b31_58%,#0e3840)] px-4 py-8 text-[#e6f5f2] sm:px-6 sm:py-10">
         <div className="mx-auto grid w-full max-w-6xl gap-5 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-          <section className="glass-panel rounded-[26px] border-white/15 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.38)] sm:p-8">
+          <section className="glass-panel order-2 rounded-[26px] border-white/15 p-5 shadow-[0_30px_90px_rgba(0,0,0,0.38)] sm:p-7 lg:order-1 lg:p-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1 text-xs font-semibold tracking-[0.08em] text-[#bee8df] uppercase">
               <ShieldCheck size={14} />
               LifeSync Onboarding
@@ -41,7 +48,7 @@ export default async function SignUpPage({
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#bcd8d2]">
               {t.landing.title}
             </p>
-            <div className="mt-6 grid gap-2 sm:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 gap-2 min-[430px]:grid-cols-3">
               <div className="rounded-[14px] border border-white/15 bg-white/8 px-3 py-2 text-center">
                 <p className="text-[10px] tracking-[0.08em] text-[#9fc7c0] uppercase">{t.dashboard.flowScore}</p>
                 <p className="mt-1 text-xl font-bold text-white">92</p>
@@ -57,7 +64,7 @@ export default async function SignUpPage({
             </div>
           </section>
 
-          <Card className="glass-panel w-full rounded-[26px] border-white/15 bg-[color-mix(in_srgb,var(--surface)_84%,transparent)] p-5 shadow-[0_28px_84px_rgba(0,0,0,0.38)] sm:p-7">
+          <Card className="glass-panel order-1 w-full rounded-[26px] border-white/15 bg-[color-mix(in_srgb,var(--surface)_84%,transparent)] p-5 shadow-[0_28px_84px_rgba(0,0,0,0.38)] sm:p-7 lg:order-2">
             <div className="flex items-center justify-between gap-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-200)] bg-[var(--brand-50)] px-3 py-1 text-xs font-semibold text-[var(--brand-800)]">
                 <Sparkles size={13} />
@@ -65,11 +72,16 @@ export default async function SignUpPage({
               </div>
               <AuthLanguageSwitcher basePath="/auth/sign-up" defaultLanguage={language} />
             </div>
-            <h2 className="mt-6 text-3xl font-bold text-[var(--text)]">{t.auth.signUpTitle}</h2>
+            <h2 className="mt-6 text-2xl font-bold text-[var(--text)] sm:text-3xl">{t.auth.signUpTitle}</h2>
             <p className="mb-5 mt-2 text-sm text-[var(--text-soft)]">{t.auth.signUpCta}</p>
             {oauthError ? (
               <p className="mb-4 rounded-[12px] border border-[var(--danger)]/30 bg-[var(--danger)]/10 p-3 text-sm text-[var(--danger)]">
                 {t.auth.oauthFailed}: {oauthError}
+              </p>
+            ) : null}
+            {oauthCallbackHint ? (
+              <p className="mb-4 rounded-[12px] border border-[var(--warning)]/35 bg-[var(--warning)]/10 p-3 text-xs leading-relaxed text-[var(--text-soft)]">
+                {oauthCallbackHint}
               </p>
             ) : null}
             <SignUpForm />
