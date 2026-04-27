@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/components/i18n/i18n-provider";
 
-type OAuthProvider = "google" | "apple";
+type OAuthProvider = "google";
 type AuthLikeError = { message?: string; code?: string; error_code?: string };
 
 function normalizeAuthError(error: unknown): AuthLikeError | null {
@@ -57,7 +57,6 @@ export function SignInForm() {
   const [error, setError] = useState<string | null>(null);
   const [pendingProvider, setPendingProvider] = useState<OAuthProvider | null>(null);
   const googleEnabled = process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED !== "false";
-  const appleEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
   const oauthHint =
     language === "ru"
       ? "Если кнопка не работает, включите провайдера в Supabase: Authentication -> Sign In / Providers."
@@ -162,17 +161,6 @@ export function SignInForm() {
             {pendingProvider === "google" ? "..." : t.auth.signInWithGoogle}
           </Button>
         ) : null}
-        {appleEnabled ? (
-          <Button
-            variant="secondary"
-            className="h-11 w-full rounded-[12px]"
-            type="button"
-            onClick={() => signInWithOAuth("apple", "Apple")}
-            disabled={pendingProvider !== null}
-          >
-            {pendingProvider === "apple" ? "..." : t.auth.signInWithApple}
-          </Button>
-        ) : null}
       </div>
       <p className="text-xs leading-relaxed text-[var(--text-muted)]">{oauthHint}</p>
     </div>
@@ -187,7 +175,6 @@ export function SignUpForm() {
   const [error, setError] = useState<string | null>(null);
   const [pendingProvider, setPendingProvider] = useState<OAuthProvider | null>(null);
   const googleEnabled = process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED !== "false";
-  const appleEnabled = process.env.NEXT_PUBLIC_AUTH_APPLE_ENABLED === "true";
   const oauthHint =
     language === "ru"
       ? "Если OAuth не запускается, проверьте provider и callback URL в Supabase."
@@ -292,17 +279,6 @@ export function SignUpForm() {
             disabled={pendingProvider !== null}
           >
             {pendingProvider === "google" ? "..." : t.auth.signInWithGoogle}
-          </Button>
-        ) : null}
-        {appleEnabled ? (
-          <Button
-            variant="secondary"
-            className="h-11 w-full rounded-[12px]"
-            type="button"
-            onClick={() => signInWithOAuth("apple", "Apple")}
-            disabled={pendingProvider !== null}
-          >
-            {pendingProvider === "apple" ? "..." : t.auth.signInWithApple}
           </Button>
         ) : null}
       </div>
